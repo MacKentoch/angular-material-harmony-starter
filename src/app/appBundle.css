@@ -1,0 +1,13 @@
+/*============================== 
+	app main scss
+ ==============================*/
+/*============================== 
+	global app variables
+ ==============================*/
+.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit; }
+
+body {
+  background-color: #F1F1F1; }
