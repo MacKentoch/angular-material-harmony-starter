@@ -21,20 +21,20 @@
 			
 		
 			<md-toolbar layout="row" class="md-whiteframe-z2 md-hue-2">
-				<md-button 	class="menu" 
+				<md-button 	class="menu md-accent" 
 										hide-gt-sm 
 										ng-click="homeCtrl.toggleSidenav('left')" 
 										aria-label="Show Navigation Menu">
 					<md-icon md-svg-icon="menu_24" >
 					</md-icon>
 				</md-button>
-				
-				<h3>Angular Material - ES6 Starter App</h3>
-				
+				<div layout-padding>
+					<h3>Angular Material - ES6 Starter App</h3>
+				</div>
 				<div layout="row" flex layout-align="end center">
 					<div>
 						<md-menu>
-							<md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+							<md-button aria-label="Open phone interactions menu" class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
 								<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
 							</md-button>
 							<md-menu-content width="4">
