@@ -9,5 +9,8 @@
   font-weight: inherit;
   margin: inherit; }
 
+#topNavigationBar {
+  height: 80px; }
+
 body {
   background-color: #F1F1F1; }

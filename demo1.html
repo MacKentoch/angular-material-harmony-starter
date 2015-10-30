@@ -17,10 +17,11 @@
 	<body layout="column" ng-controller="homeController as homeCtrl" ng-cloak="">
 		
 		
+		<!--1st column row : top navigation bar-->
 		<div layout="column" flex tabIndex="-1" role="main">
 			
-		
-			<md-toolbar layout="row" class="md-whiteframe-z2 md-hue-2">
+		<!--toolbar : top navigation menu-->
+			<md-toolbar id="topNavigationBar" layout="row" class="md-whiteframe-z2 md-hue-2">
 				
 				<div layout="row" layout-padding layout-align="start center">				
 					<md-button 	class="md-icon-button md-accent" 
@@ -77,6 +78,9 @@
 				
 			</md-toolbar>
 			
+			
+			
+			<!--2nd column row : sidenav and content-->
 			<div layout="row" flex>
 				<md-sidenav layout="column" 
 										class="md-sidenav-left md-hue-1 md-whiteframe-z2" 
@@ -91,7 +95,9 @@
 					</md-content>
 				</div>
 				
-			</div>		
+			</div>
+			
+					
 		</div>
 				
 		<script type="text/javascript" src="public/js/appBundle.js"></script>						
