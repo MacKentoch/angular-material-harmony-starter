@@ -30997,7 +30997,6 @@ $__System.register('13', ['5', '7', '9', '12', 'c'], function (_export) {
 });
 $__System.register('14', ['12'], function (_export) {
 	/* global angular */
-	/* global _ */
 	'use strict';
 
 	var _, ROOT_ICONS_URL, ICON_TANK, getIconUrl;
@@ -31053,9 +31052,12 @@ $__System.register('15', ['14'], function (_export) {
 	var getIconUrl;
 
 	function appConfig($mdThemingProvider, $mdIconProvider) {
-		var menuIcon = getIconUrl('menu', 24);
 
-		//$mdThemingProvider.theme('default') .dark();
+		var menuIcon24Url = getIconUrl('menu', 24);
+
+		$mdIconProvider.icon('menu_24', menuIcon24Url);
+
+		$mdThemingProvider.theme('default').primaryPalette('grey').accentPalette('deep-orange').warnPalette('red').backgroundPalette('grey');
 	}
 
 	return {
