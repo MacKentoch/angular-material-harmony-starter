@@ -43,19 +43,22 @@
 			<md-toolbar layout="row" class="md-whiteframe-z2 md-hue-2">
 				
 				<div layout="row" layout-fill>
-					<md-button 	class="menu md-accent" 
-											ng-click="homeCtrl.toggleSidenav('left')" 
-											aria-label="Show Navigation Menu">
-						<md-icon md-svg-icon="menu_24" ></md-icon>
-					</md-button>
+
+					<div layout="row" layout-padding layout-align="start center">
+						<md-button 	class="md-icon-button md-accent" 
+												ng-click="homeCtrl.toggleSidenav('left')" 
+												aria-label="Show Navigation Menu">
+							<md-icon md-svg-icon="menu_24" ></md-icon>
+						</md-button>
+					</div>
 					
-					<div layout-padding>
+					<div layout="row" layout-padding layout-align="start center">
 						<h3 class="md-header">Angular Material - ES6 Starter App</h3>	
 					</div>
 					
 					<span flex></span>
 
-					<div layout="row" layout-align="end center">	
+					<div layout="row" layout-padding layout-align="end center">	
 						<md-menu>
 							<md-button aria-label="Open phone interactions menu" 
 												class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
@@ -84,13 +87,13 @@
 							</md-menu-content>
 						</md-menu>
 					</div>	
-
 					
 				</div>
 			</md-toolbar>
+
 			<!--content-->
 			<div layout="column" flex id="content">
-				<md-content layout="column" flex class="md-padding">
+				<md-content layout="column" md-scroll-y flex class="md-padding">
 				
 				</md-content>
 			</div>
