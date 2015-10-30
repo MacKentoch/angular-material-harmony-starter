@@ -31023,6 +31023,22 @@ $__System.register('14', ['12'], function (_export) {
 					size: 48,
 					url: ROOT_ICONS_URL + 'ic_menu_48px.svg'
 				}]
+			}, {
+				name: 'moreVertical',
+				icons: [{
+					size: 18,
+					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
+
+				}, {
+					size: 24,
+					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
+				}, {
+					size: 36,
+					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
+				}, {
+					size: 48,
+					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
+				}]
 			}];
 
 			getIconUrl = function getIconUrl(name, size) {
@@ -31053,9 +31069,7 @@ $__System.register('15', ['14'], function (_export) {
 
 	function appConfig($mdThemingProvider, $mdIconProvider) {
 
-		var menuIcon24Url = getIconUrl('menu', 24);
-
-		$mdIconProvider.icon('menu_24', menuIcon24Url);
+		$mdIconProvider.icon('menu_24', getIconUrl('menu', 24)).icon('moreVertical', getIconUrl('moreVertical', 24));
 
 		$mdThemingProvider.theme('default').primaryPalette('grey').accentPalette('deep-orange').warnPalette('red').backgroundPalette('grey');
 	}

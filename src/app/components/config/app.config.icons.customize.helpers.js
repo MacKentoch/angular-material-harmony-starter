@@ -25,7 +25,30 @@ const ICON_TANK = [
 				url		: `${ROOT_ICONS_URL}ic_menu_48px.svg`
 			}										
 		]
-	}
+	},
+	
+	{
+		name : 'moreVertical',
+		icons : [
+			{
+				size 	: 18,
+				url		: `${ROOT_ICONS_URL}ic_more_vert_18px.svg`
+				
+			},
+			{
+				size 	: 24,
+				url		: `${ROOT_ICONS_URL}ic_more_vert_18px.svg`
+			},
+			{
+				size 	: 36,
+				url		: `${ROOT_ICONS_URL}ic_more_vert_18px.svg`
+			},
+			{
+				size 	: 48,
+				url		: `${ROOT_ICONS_URL}ic_more_vert_18px.svg`
+			}										
+		]
+	}	
 		
 ];
 

@@ -2,10 +2,9 @@ import {getIconUrl} from './app.config.icons.customize.helpers';
 
 function appConfig($mdThemingProvider, $mdIconProvider){
 	
-	let menuIcon24Url = getIconUrl('menu', 24);
-	
 	  $mdIconProvider
-       .icon('menu_24', menuIcon24Url);
+       .icon('menu_24', getIconUrl('menu', 24))
+       .icon('moreVertical', getIconUrl('moreVertical', 24));			 
 			 
 		$mdThemingProvider.theme('default')
 			.primaryPalette('grey')
