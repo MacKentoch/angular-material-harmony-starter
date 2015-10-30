@@ -36,14 +36,11 @@
 			
 			
 		<!--right content-->
-		<div 	layout="column" 
-					flex 
-					layout-fill
-					role="main">
+		<div 	layout="column" layout-fill role="main">
 			<!--toolbar : top navigation menu-->
 			<md-toolbar layout="row" class="md-whiteframe-z2 md-hue-2">
 				
-				<div layout="row" layout-fill>
+				<div layout="row" flex layout-fill>
 					
 					<div layout="row" layout-padding layout-align="start center">	
 						<md-button 	class="md-icon-button md-accent" 
@@ -55,17 +52,21 @@
 					</div>
 					
 					<div layout="row" layout-padding layout-align="start center">
-						<h3 class="md-header">Angular Material - ES6 Starter App</h3>	
+						<h4 class="md-header" flex>Angular Material - ES6 Starter App</h4>	
 					</div>
 					
 					<span flex></span>
 
 					<div layout="row" layout-padding layout-align="end center">	
 						<md-menu>
-							<md-button aria-label="Open phone interactions menu" 
-												class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-								<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
-							</md-button>
+							
+							<div layout="row" layout-padding>		
+								<md-button aria-label="Open phone interactions menu" 
+													class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+									<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
+								</md-button>
+							</div>
+							
 							<md-menu-content width="4">
 								<md-menu-item>
 									<md-button ng-click="ctrl.redial($event)">

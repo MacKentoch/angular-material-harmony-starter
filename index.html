@@ -1,7 +1,7 @@
 	<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ngMaterial starter</title>
+		<title>angular material starter (ES6)</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
 			
 			
 		<!--right content-->
-		<div 	layout="column" class="relative" layout-fill role="main">
+		<div 	layout="column" layout-fill role="main">
 			
 			<!--toolbar : top navigation menu-->
 			<md-toolbar layout="row" class="md-whiteframe-z2 md-hue-2">
@@ -49,17 +49,21 @@
 					</div>
 					
 					<div layout="row" layout-padding layout-align="start center">
-						<h3 class="md-header">Angular Material - ES6 Starter App</h3>	
+						<h4 class="md-header" flex>Angular Material - ES6 Starter App</h4>	
 					</div>
 					
 					<span flex></span>
 
 					<div layout="row" layout-align="end center">	
 						<md-menu>
-							<md-button aria-label="Open phone interactions menu" 
-												class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-								<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
-							</md-button>
+							
+							<div layout="row" layout-padding>							
+								<md-button aria-label="Open phone interactions menu" 
+													class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+									<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
+								</md-button>
+							</div>
+							
 							<md-menu-content width="4">
 								<md-menu-item>
 									<md-button ng-click="ctrl.redial($event)">

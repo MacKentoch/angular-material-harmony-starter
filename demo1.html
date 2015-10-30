@@ -33,7 +33,7 @@
 				</div>
 												
 				<div layout="row" layout-padding layout-align="start center">
-					<h3>Angular Material - ES6 Starter App</h3>
+					<h4 class="md-header" flex>Angular Material - ES6 Starter App</h4>
 				</div>
 				
 				<span flex></span>
@@ -42,11 +42,13 @@
 					<div>
 						<md-menu>
 							
-							<md-button 	aria-label="Open phone interactions menu" 
-													class="md-icon-button md-accent" 
-													ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-								<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
-							</md-button>
+							<div layout="row" layout-padding>	
+								<md-button 	aria-label="Open phone interactions menu" 
+														class="md-icon-button md-accent" 
+														ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+									<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
+								</md-button>
+							</div>
 							
 							<md-menu-content width="4">
 								<md-menu-item>
