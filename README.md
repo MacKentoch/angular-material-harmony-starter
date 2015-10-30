@@ -24,6 +24,6 @@ gulp connect
 
 some basic templates :
 
-- [preview 1](https://rawgit.com/MacKentoch/angular-material-harmony-starter/master/index.html)
+- [preview 1](https://rawgit.com/MacKentoch/angular-material-harmony-starter/master/demo2.html)
 - [preview 2](https://rawgit.com/MacKentoch/angular-material-harmony-starter/master/demo1.html)
 - [preview 3](https://rawgit.com/MacKentoch/angular-material-harmony-starter/master/demo3.html)
