@@ -15,12 +15,6 @@ ___
 #start
 
 ```shell
-npm install  
-```
-
-Or if you prefer a server (*not required since sfx bundled*) :
-
-```shell
 npm install
 
 gulp connect  
@@ -28,4 +22,4 @@ gulp connect
 
 #What it looks like 
 
-[preview from index.html](https://rawgit.com/MacKentoch/angular-material-harmony-starter/master/index.html)
+[preview1](https://rawgit.com/MacKentoch/angular-material-harmony-starter/master/index.html)

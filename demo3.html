@@ -19,7 +19,8 @@
 		<!--left sidenav-->
 		<md-sidenav layout="column" 
 								class="md-sidenav-left md-hue-1 md-whiteframe-z2" 
-								md-component-id="left">
+								md-component-id="left" 
+								md-is-locked-open="$mdMedia('gt-sm')">
 		
 			<md-toolbar class="md-tall md-hue-2 md-whiteframe-z1">
 				<span flex></span>
@@ -42,8 +43,9 @@
 			<!--toolbar : top navigation menu-->
 			<md-toolbar layout="row" class="md-whiteframe-z2 md-hue-2">
 				
-				<div layout="row" layout-fill>
-					<md-button 	class="menu md-accent" 
+				<div layout="row" flex>
+					<md-button 	class="menu" 
+											hide-gt-sm 
 											ng-click="homeCtrl.toggleSidenav('left')" 
 											aria-label="Show Navigation Menu">
 						<md-icon md-svg-icon="menu_24" ></md-icon>
@@ -58,7 +60,7 @@
 					<div layout="row" layout-align="end center">	
 						<md-menu>
 							<md-button aria-label="Open phone interactions menu" 
-												class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+												class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
 								<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
 							</md-button>
 							<md-menu-content width="4">
