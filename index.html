@@ -40,7 +40,7 @@
 			
 			
 			<!--toolbar : top navigation menu (NO SEARCH = MAIN)-->
-			<md-toolbar id="topNavigationBar" ng-show="!homeCtrl.showSearch" layout="row" class="md-whiteframe-z2 md-hue-2">
+			<md-toolbar id="topNavigationBar" ng-if="!homeCtrl.showSearch" layout="row" class="md-whiteframe-z2 md-hue-2">
 				
 				<div layout="row" flex layout-fill>
 					
@@ -117,7 +117,7 @@
 			
 			
 			<!--toolbar : top navigation WHEN SEARCH-->
-      <md-toolbar id="topSearchBar" class="md-whiteframe-z2 md-hue-1" layout="row" ng-show="homeCtrl.showSearch">
+      <md-toolbar id="topSearchBar" class="md-whiteframe-z2 md-hue-1" layout="row" ng-if="homeCtrl.showSearch">
         
 				<div layout="row" flex layout-fill class="md-toolbar-tools">
           <md-button 	ng-click="homeCtrl.showSearch = !homeCtrl.showSearch" 
@@ -138,7 +138,7 @@
 											class="md-icon-button md-accent">
             <md-icon md-svg-icon="search_24"></md-icon>
           </md-button>
-					</div>
+					
 					
           <md-button 	aria-label="Open Settings" 
 											ng-click="homeCtrl.showSearchOptionsSheet($event)"
