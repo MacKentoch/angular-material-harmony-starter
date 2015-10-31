@@ -1,5 +1,4 @@
 /* global angular */
-//import searchBottomSheetModel from 	'./app.searchBottomSheet.model.json!json';
 
 const SEARCH_BOTTOM_SHEET_CONTROLLER_NAME 		= 'searchBottomSheetController';
 const SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME 	= 'searchBottomSheetCtrl';
