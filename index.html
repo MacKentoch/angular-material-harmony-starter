@@ -61,13 +61,18 @@
 
 					<div layout="row"  layout-align="end center">	
 
-						<md-button aria-label="Search" ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
-							<ng-md-icon icon="search"></ng-md-icon>
-						</md-button>
+
 					
 						<md-menu>
 							
-							<div layout="row" layout-padding >		
+							<div layout="row" layout-padding >
+								
+							<md-button 	aria-label="Search" 
+													class="md-icon-button md-accent"
+													ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
+								<md-icon md-svg-icon="search_24" ></md-icon>
+							</md-button>								
+										
 								<md-button 	aria-label="Open configuration menu menu" 
 														class="md-icon-button md-accent" 
 														ng-click="homeCtrl.openConfigurationMenu($mdOpenMenu, $event)">
@@ -112,24 +117,35 @@
 			
 			
 			<!--toolbar : top navigation WHEN SEARCH-->
-      <md-toolbar class="md-hue-1" ng-show="homeCtrl.showSearch">
-        <div class="md-toolbar-tools">
-          <md-button ng-click="homeCtrl.showSearch = !homeCtrl.showSearch" aria-label="Back">
-            <ng-md-icon icon="arrow_back"></ng-md-icon>
+      <md-toolbar id="topSearchBar" class="md-whiteframe-z2 md-hue-1" layout="row" ng-show="homeCtrl.showSearch">
+        
+				<div layout="row" flex layout-fill class="md-toolbar-tools">
+          <md-button 	ng-click="homeCtrl.showSearch = !homeCtrl.showSearch" 
+											aria-label="Back"
+											class="md-icon-button md-accent">
+						<md-icon md-svg-icon="arrow_back_24"></md-icon>
           </md-button>
           <h3 flex="10">
             Back
           </h3>
-          <md-input-container md-theme="input" flex>
-            <label>&nbsp;</label>
-            <input ng-model="search.who" placeholder="enter search">
+          <md-input-container  flex>
+            <label>enter search</label>
+            <input ng-model="search.who">
           </md-input-container>
-          <md-button aria-label="Search" ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
-            <ng-md-icon icon="search"></ng-md-icon>
+					<div layout="row" layout-padding >
+          <md-button 	aria-label="Search" 
+											ng-click="homeCtrl.showSearch = !homeCtrl.showSearch"
+											class="md-icon-button md-accent">
+            <md-icon md-svg-icon="search_24"></md-icon>
           </md-button>
-          <md-button aria-label="Open Settings" ng-click="homeCtrl.showListBottomSheet($event)">
-            <ng-md-icon icon="more_vert"></ng-md-icon>
+					</div>
+					
+          <md-button 	aria-label="Open Settings" 
+											ng-click="homeCtrl.showSearchOptionsSheet($event)"
+											class="md-icon-button md-accent">
+						<md-icon md-svg-icon="moreVertical"></md-icon>
           </md-button>
+					</div>
         </div>
        
       </md-toolbar>			

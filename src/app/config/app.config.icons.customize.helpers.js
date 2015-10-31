@@ -53,6 +53,28 @@ const ICON_TANK = [
 	},
 	
 	{
+		name : 'arrow_back',
+		icons : [
+			{
+				size 	: 18,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_arrow_back_18px.svg`
+			},
+			{
+				size 	: 24,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_arrow_back_24px.svg`
+			},
+			{
+				size 	: 36,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_arrow_back_36px.svg`
+			},
+			{
+				size 	: 48,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_arrow_back_48px.svg`
+			}										
+		]
+	},	
+	
+	{
 		name : 'home',
 		icons : [
 			{
@@ -62,6 +84,20 @@ const ICON_TANK = [
 			{
 				size 	: 48,
 				url		: `${ROOT_ACTION_ICONS_URL}ic_home_48px.svg`
+			}										
+		]
+	},
+
+	{
+		name : 'search',
+		icons : [
+			{
+				size 	: 24,
+				url		: `${ROOT_ACTION_ICONS_URL}ic_search_24px.svg`
+			},
+			{
+				size 	: 48,
+				url		: `${ROOT_ACTION_ICONS_URL}ic_search_48px.svg`
 			}										
 		]
 	},

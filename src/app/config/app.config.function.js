@@ -6,6 +6,8 @@ function appConfig($mdThemingProvider, $mdIconProvider){
        .icon('menu_24',									getIconUrl('menu', 24))
        .icon('moreVertical',						getIconUrl('moreVertical', 24))
 			 .icon('home_24',									getIconUrl('home', 24))
+			 .icon('search_24',								getIconUrl('search', 24))
+			 .icon('arrow_back_24',						getIconUrl('arrow_back', 24))
 			 .icon('language_24',							getIconUrl('language', 24))
 			 .icon('person_24',								getIconUrl('person', 24))
 			 .icon('person_add_24',						getIconUrl('person_add', 24))
