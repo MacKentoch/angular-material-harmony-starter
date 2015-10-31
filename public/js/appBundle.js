@@ -30999,45 +30999,160 @@ $__System.register('14', ['12'], function (_export) {
 	/* global angular */
 	'use strict';
 
-	var _, ROOT_ICONS_URL, ICON_TANK, getIconUrl;
+	var _, ROOT_NAVIGATION_ICONS_URL, ROOT_ALERT_ICONS_URL, ROOT_ACTION_ICONS_URL, ROOT_SOCIAL_ICONS_URL, ICON_TANK, getIconUrl;
 
 	return {
 		setters: [function (_2) {
 			_ = _2['default'];
 		}],
 		execute: function () {
-			ROOT_ICONS_URL = 'public/svg/navigation/';
+			ROOT_NAVIGATION_ICONS_URL = 'public/svg/navigation/';
+			ROOT_ALERT_ICONS_URL = 'public/svg/alert/';
+			ROOT_ACTION_ICONS_URL = 'public/svg/action/';
+			ROOT_SOCIAL_ICONS_URL = 'public/svg/social/';
 			ICON_TANK = [{
 				name: 'menu',
 				icons: [{
 					size: 18,
-					url: ROOT_ICONS_URL + 'ic_menu_18px.svg'
-
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_menu_18px.svg'
 				}, {
 					size: 24,
-					url: ROOT_ICONS_URL + 'ic_menu_24px.svg'
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_menu_24px.svg'
 				}, {
 					size: 36,
-					url: ROOT_ICONS_URL + 'ic_menu_36px.svg'
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_menu_36px.svg'
 				}, {
 					size: 48,
-					url: ROOT_ICONS_URL + 'ic_menu_48px.svg'
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_menu_48px.svg'
 				}]
 			}, {
 				name: 'moreVertical',
 				icons: [{
 					size: 18,
-					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
-
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_more_vert_18px.svg'
 				}, {
 					size: 24,
-					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_more_vert_18px.svg'
 				}, {
 					size: 36,
-					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_more_vert_18px.svg'
 				}, {
 					size: 48,
-					url: ROOT_ICONS_URL + 'ic_more_vert_18px.svg'
+					url: ROOT_NAVIGATION_ICONS_URL + 'ic_more_vert_18px.svg'
+				}]
+			}, {
+				name: 'home',
+				icons: [{
+					size: 24,
+					url: ROOT_ACTION_ICONS_URL + 'ic_home_24px.svg'
+				}, {
+					size: 48,
+					url: ROOT_ACTION_ICONS_URL + 'ic_home_48px.svg'
+				}]
+			}, {
+				name: 'language',
+				icons: [{
+					size: 24,
+					url: ROOT_ACTION_ICONS_URL + 'ic_language_24px.svg'
+				}, {
+					size: 48,
+					url: ROOT_ACTION_ICONS_URL + 'ic_language_48px.svg'
+				}]
+			}, {
+				name: 'warning',
+				icons: [{
+					size: 18,
+					url: ROOT_ALERT_ICONS_URL + 'ic_warning_18px.svg'
+				}, {
+					size: 24,
+					url: ROOT_ALERT_ICONS_URL + 'ic_warning_24px.svg'
+				}, {
+					size: 36,
+					url: ROOT_ALERT_ICONS_URL + 'ic_warning_36px.svg'
+				}, {
+					size: 48,
+					url: ROOT_ALERT_ICONS_URL + 'ic_warning_48px.svg'
+				}]
+			}, {
+				name: 'error',
+				icons: [{
+					size: 18,
+					url: ROOT_ALERT_ICONS_URL + 'ic_error_18px.svg'
+				}, {
+					size: 24,
+					url: ROOT_ALERT_ICONS_URL + 'ic_error_24px.svg'
+				}, {
+					size: 36,
+					url: ROOT_ALERT_ICONS_URL + 'ic_error_36px.svg'
+				}, {
+					size: 48,
+					url: ROOT_ALERT_ICONS_URL + 'ic_error_48px.svg'
+				}]
+			}, {
+				name: 'person',
+				icons: [{
+					size: 18,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_18px.svg'
+				}, {
+					size: 24,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_24px.svg'
+				}, {
+					size: 36,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_36px.svg'
+				}, {
+					size: 48,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_48px.svg'
+				}]
+			}, {
+				name: 'person_add',
+				icons: [{
+					size: 18,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_add_18px.svg'
+				}, {
+					size: 24,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_add_24px.svg'
+				}, {
+					size: 36,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_add_36px.svg'
+				}, {
+					size: 48,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_person_add_48px.svg'
+				}]
+			}, {
+				name: 'notifications',
+				icons: [{
+					size: 24,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_24px.svg'
+				}, {
+					size: 48,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_48px.svg'
+				}]
+			}, {
+				name: 'notifications_active',
+				icons: [{
+					size: 24,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_active_24px.svg'
+				}, {
+					size: 48,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_active_48px.svg'
+				}]
+			}, {
+				name: 'notifications_none',
+				icons: [{
+					size: 24,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_none_24px.svg'
+				}, {
+					size: 48,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_none_48px.svg'
+				}]
+			}, {
+				name: 'notifications_off',
+				icons: [{
+					size: 24,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_off_24px.svg'
+				}, {
+					size: 48,
+					url: ROOT_SOCIAL_ICONS_URL + 'ic_notifications_off_48px.svg'
 				}]
 			}];
 
@@ -31069,7 +31184,7 @@ $__System.register('15', ['14'], function (_export) {
 
 	function appConfig($mdThemingProvider, $mdIconProvider) {
 
-		$mdIconProvider.icon('menu_24', getIconUrl('menu', 24)).icon('moreVertical', getIconUrl('moreVertical', 24));
+		$mdIconProvider.icon('menu_24', getIconUrl('menu', 24)).icon('moreVertical', getIconUrl('moreVertical', 24)).icon('home_24', getIconUrl('home', 24)).icon('language_24', getIconUrl('language', 24)).icon('person_24', getIconUrl('person', 24)).icon('person_add_24', getIconUrl('person_add', 24)).icon('error_24', getIconUrl('error', 24)).icon('notifications_24', getIconUrl('notifications', 24)).icon('notifications_active_24', getIconUrl('notifications_active', 24)).icon('notifications_none_24', getIconUrl('notifications_none', 24)).icon('notifications_off_24', getIconUrl('notifications_off', 24)).icon('error_48', getIconUrl('error', 48)).icon('warning_24', getIconUrl('warning', 24)).icon('warning_48', getIconUrl('warning', 48));
 
 		$mdThemingProvider.theme('default').primaryPalette('grey').accentPalette('deep-orange').warnPalette('red').backgroundPalette('grey');
 	}
@@ -31205,33 +31320,53 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 			_classCallCheck = _b['default'];
 		}],
 		execute: function () {
+			/* global angular */
 			'use strict';
 
 			HOME_CONTROLLER_NAME = 'homeController';
 			HOME_CONTROLLERAS_NAME = 'homeCtrl';
 
 			homeController = (function () {
-				function homeController($mdSidenav) {
+				function homeController($mdSidenav, $mdDialog) {
 					_classCallCheck(this, homeController);
 
 					this.$mdSidenav = $mdSidenav;
+					this.$mdDialog = $mdDialog;
+
 					this.init();
 				}
 
 				_createClass(homeController, [{
 					key: 'init',
-					value: function init() {}
+					value: function init() {
+						this.originatorEv = null;
+						this.notificationsEnabled = false;
+						this.user = angular.extend({}, {
+							'userLogged': false
+						});
+					}
 				}, {
 					key: 'toggleSidenav',
 					value: function toggleSidenav(menuId) {
 						this.$mdSidenav(menuId).toggle();
+					}
+				}, {
+					key: 'toggleNotifications',
+					value: function toggleNotifications() {
+						this.notificationsEnabled = !this.notificationsEnabled;
+					}
+				}, {
+					key: 'openMenu',
+					value: function openMenu($mdOpenMenu, ev) {
+						this.originatorEv = ev;
+						$mdOpenMenu(ev);
 					}
 				}]);
 
 				return homeController;
 			})();
 
-			homeController.$inject = ['$mdSidenav'];
+			homeController.$inject = ['$mdSidenav', '$mdDialog'];
 
 			_export('default', homeController);
 

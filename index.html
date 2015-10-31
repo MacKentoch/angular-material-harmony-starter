@@ -14,10 +14,13 @@
     </style>		
 	</head>
 
-	<body layout="row" layout-fill ng-controller="homeController as homeCtrl" ng-cloak="">
+	<body layout="row" ng-controller="homeController as homeCtrl" ng-cloak="">
 		
-		<!--left : sidenav-->
-		<md-sidenav layout="column" class="md-sidenav-left md-hue-1 md-whiteframe-z2" md-component-id="left">
+		<!--left sidenav-->
+		<md-sidenav layout="column" 
+								class="md-sidenav-left md-hue-1 md-whiteframe-z2" 
+								md-component-id="left" 
+								md-is-locked-open="$mdMedia('gt-sm')">
 		
 			<md-toolbar class="md-tall md-hue-2 md-whiteframe-z1">
 				<span flex></span>
@@ -32,16 +35,16 @@
 		</md-sidenav>
 			
 			
-		<!--right : content-->
+		<!--right content-->
 		<div 	layout="column" layout-fill role="main">
-			
 			<!--toolbar : top navigation menu-->
 			<md-toolbar id="topNavigationBar" layout="row" class="md-whiteframe-z2 md-hue-2">
 				
 				<div layout="row" flex layout-fill>
-
-					<div layout="row" layout-padding layout-align="start center">
+					
+					<div layout="row" layout-padding layout-align="start center">	
 						<md-button 	class="md-icon-button md-accent" 
+												hide-gt-sm 
 												ng-click="homeCtrl.toggleSidenav('left')" 
 												aria-label="Show Navigation Menu">
 							<md-icon md-svg-icon="menu_24" ></md-icon>
@@ -54,43 +57,50 @@
 					
 					<span flex></span>
 
-					<div layout="row" layout-align="end center">	
+					<div layout="row"  layout-align="end center">	
 						<md-menu>
 							
-							<div layout="row" layout-padding>							
-								<md-button aria-label="Open phone interactions menu" 
-													class="md-icon-button md-accent" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+							<div layout="row" layout-padding >		
+								<md-button 	aria-label="Open configuration menu menu" 
+														class="md-icon-button md-accent" 
+														ng-click="homeCtrl.openConfigurationMenu($mdOpenMenu, $event)">
 									<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
 								</md-button>
 							</div>
 							
 							<md-menu-content width="4">
+								
 								<md-menu-item>
-									<md-button ng-click="ctrl.redial($event)">
-										<!--<md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>-->
-										Redial
+									<md-button ng-click="homeCtrl.openMyProfile($event)" disabled="{{homeCtrl.user.userLogged ? true : false}}">
+										<md-icon md-svg-icon="person_24" md-menu-align-target></md-icon>
+										my Profile
 									</md-button>
 								</md-menu-item>
+								
 								<md-menu-item>
-									<md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-										<!--<md-icon md-svg-icon="call:voicemail"></md-icon>-->
-										Check voicemail
+									<md-button  ng-click="ctrl.checkVoicemail()">
+										<md-icon md-svg-icon="language_24"></md-icon>
+										Language
 									</md-button>
 								</md-menu-item>
+								
 								<md-menu-divider></md-menu-divider>
+								
 								<md-menu-item>
-									<md-button ng-click="ctrl.toggleNotifications()">
-										<!--<md-icon md-svg-icon="social:notifications-{{ctrl.notificationsEnabled ? 'off' : 'on'}}"></md-icon>-->
-										{{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+									<md-button ng-click="homeCtrl.toggleNotifications()">
+										<md-icon md-svg-icon="notifications_{{homeCtrl.notificationsEnabled ? 'off' : 'active'}}_24"></md-icon>
+										{{homeCtrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
 									</md-button>
 								</md-menu-item>
+								
 							</md-menu-content>
+							
 						</md-menu>
 					</div>	
+
 					
 				</div>
 			</md-toolbar>
-
 			<!--content-->
 			<div layout="column" flex id="content">
 				<md-content layout="column" md-scroll-y flex class="md-padding">
