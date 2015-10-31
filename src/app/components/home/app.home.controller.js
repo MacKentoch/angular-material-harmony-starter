@@ -1,6 +1,10 @@
 /* global angular */
 import searchBottomSheetModel 						from 	'../searchBottomSheet/app.searchBottomSheet.model.json!json';
 import {
+	initSearchModel,
+	initUserModel
+}																					from './app.home.controller.helpers';
+import {
 	SEARCH_BOTTOM_SHEET_CONTROLLER_NAME,
 	SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME
 }																					from '../searchBottomSheet/app.searchBottomSheet.controller';
@@ -26,9 +30,8 @@ class homeController{
 		this.searchBottomSheetModel = angular.copy(searchBottomSheetModel);
 		this.originatorEv						= null;
 		this.notificationsEnabled		= false;
-		this.user										= angular.extend({}, {
-			'userLogged' :	false
-		});
+		this.user										= initUserModel();
+		this.search 								= initSearchModel();		//search model (input + 'by' = search option)
 	}
 	
 	toggleSidenav(menuId) {
@@ -55,7 +58,7 @@ class homeController{
 				'searchBottomSheetModel' : () => this.searchBottomSheetModel
 			}
     }).then(
-			(clickedItem) => { this.alert = clickedItem.name + ' clicked!';}
+			(clickedItem) => this.search.by = clickedItem.name
 		);		
 	}
 

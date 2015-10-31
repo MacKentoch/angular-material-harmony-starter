@@ -103,13 +103,7 @@
 				</div>
 			</md-toolbar>
 			
-			
- 
-					
-				
-
-			
-			
+		
 			
 			<!--toolbar : top navigation WHEN SEARCH-->
       <md-toolbar id="topSearchBar" class="md-whiteframe-z2 md-hue-1" layout="row" ng-if="homeCtrl.showSearch">
@@ -123,8 +117,8 @@
             Back
           </h3>
           <md-input-container  flex>
-            <label>enter search</label>
-            <input ng-model="search.who">
+            <label for="searchInput">enter search</label>
+            <input id="searchInput" type="text" ng-model="homeCtrl.search.what">
           </md-input-container>
 					<div layout="row" layout-padding >
           <md-button 	aria-label="Search" 

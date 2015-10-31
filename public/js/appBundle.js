@@ -31575,7 +31575,37 @@ $__System.registerDynamic("1c", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.register('1d', ['1a', '1b'], function (_export) {
+$__System.register('1d', [], function (_export) {
+	/* global angular */
+
+	'use strict';
+
+	var initSearchModel, initUserModel;
+	return {
+		setters: [],
+		execute: function () {
+			initSearchModel = function initSearchModel() {
+				var _initSearchModel = {
+					what: '',
+					by: 'name'
+				};
+				return angular.copy(_initSearchModel);
+			};
+
+			initUserModel = function initUserModel() {
+				var _initUserModel = {
+					userLogged: false
+				};
+				return angular.copy(_initUserModel);
+			};
+
+			_export('initSearchModel', initSearchModel);
+
+			_export('initUserModel', initUserModel);
+		}
+	};
+});
+$__System.register('1e', ['1a', '1b'], function (_export) {
 	var _createClass, _classCallCheck, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME, searchBottomSheetController;
 
 	return {
@@ -31586,7 +31616,6 @@ $__System.register('1d', ['1a', '1b'], function (_export) {
 		}],
 		execute: function () {
 			/* global angular */
-			//import searchBottomSheetModel from 	'./app.searchBottomSheet.model.json!json';
 
 			'use strict';
 
@@ -31646,14 +31675,14 @@ $__System.register('1d', ['1a', '1b'], function (_export) {
 });
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("1e", [], function() {
+define("1f", [], function() {
   return "<md-bottom-sheet class=\"md-list md-has-header\"> \n\t\t\n\t<md-list>\n\t\t<md-subheader class=\"md-no-sticky\">Search by</md-subheader>\n\t\t\n\t\t<md-list-item ng-repeat=\"option in searchBottomSheetCtrl.searchSheetModel track by $index\"\n\t\t\t\t\t\t\t\t\tng-click=\"searchBottomSheetCtrl.optionClick($index)\">\n\t\t\t<p> {{ option.name }} </p>\n\t\t\t<md-checkbox class=\"md-secondary\" aria-label=\"{{option.name}}-check\" md-no-ink ng-model=\"option.checked\" ng-click=\"searchBottomSheetCtrl.checkBoxClicked($index)\"></md-checkbox>\n\t\t</md-list-item>\n\t\t\t\n\t</md-list>\t\n\t\n</md-bottom-sheet>";
 });
 
 _removeDefine();
 })();
-$__System.register('1f', ['1a', '1b', '1c', '1d', '1e'], function (_export) {
-	var _createClass, _classCallCheck, searchBottomSheetModel, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME, searchBottomSheetTemplate, HOME_CONTROLLER_NAME, HOME_CONTROLLERAS_NAME, homeController;
+$__System.register('20', ['1a', '1b', '1c', '1d', '1e', '1f'], function (_export) {
+	var _createClass, _classCallCheck, searchBottomSheetModel, initSearchModel, initUserModel, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME, searchBottomSheetTemplate, HOME_CONTROLLER_NAME, HOME_CONTROLLERAS_NAME, homeController;
 
 	return {
 		setters: [function (_a) {
@@ -31663,10 +31692,13 @@ $__System.register('1f', ['1a', '1b', '1c', '1d', '1e'], function (_export) {
 		}, function (_c) {
 			searchBottomSheetModel = _c['default'];
 		}, function (_d) {
-			SEARCH_BOTTOM_SHEET_CONTROLLER_NAME = _d.SEARCH_BOTTOM_SHEET_CONTROLLER_NAME;
-			SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME = _d.SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME;
+			initSearchModel = _d.initSearchModel;
+			initUserModel = _d.initUserModel;
 		}, function (_e) {
-			searchBottomSheetTemplate = _e['default'];
+			SEARCH_BOTTOM_SHEET_CONTROLLER_NAME = _e.SEARCH_BOTTOM_SHEET_CONTROLLER_NAME;
+			SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME = _e.SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME;
+		}, function (_f) {
+			searchBottomSheetTemplate = _f['default'];
 		}],
 		execute: function () {
 			/* global angular */
@@ -31693,9 +31725,8 @@ $__System.register('1f', ['1a', '1b', '1c', '1d', '1e'], function (_export) {
 						this.searchBottomSheetModel = angular.copy(searchBottomSheetModel);
 						this.originatorEv = null;
 						this.notificationsEnabled = false;
-						this.user = angular.extend({}, {
-							'userLogged': false
-						});
+						this.user = initUserModel();
+						this.search = initSearchModel();
 					}
 				}, {
 					key: 'toggleSidenav',
@@ -31730,7 +31761,7 @@ $__System.register('1f', ['1a', '1b', '1c', '1d', '1e'], function (_export) {
 								}
 							}
 						}).then(function (clickedItem) {
-							_this.alert = clickedItem.name + ' clicked!';
+							_this.search.by = clickedItem.name;console.info('search by : ' + _this.search.by);
 						});
 					}
 				}, {
@@ -31760,16 +31791,16 @@ $__System.register('1f', ['1a', '1b', '1c', '1d', '1e'], function (_export) {
 		}
 	};
 });
-$__System.register('20', ['1f'], function (_export) {
+$__System.register('21', ['20'], function (_export) {
 	/* global angular */
 	'use strict';
 
 	var homeController, HOME_CONTROLLER_NAME, HOME_CONTROLLERAS_NAME, HOME_MODULE_NAME;
 	return {
-		setters: [function (_f) {
-			homeController = _f['default'];
-			HOME_CONTROLLER_NAME = _f.HOME_CONTROLLER_NAME;
-			HOME_CONTROLLERAS_NAME = _f.HOME_CONTROLLERAS_NAME;
+		setters: [function (_) {
+			homeController = _['default'];
+			HOME_CONTROLLER_NAME = _.HOME_CONTROLLER_NAME;
+			HOME_CONTROLLERAS_NAME = _.HOME_CONTROLLERAS_NAME;
 		}],
 		execute: function () {
 			HOME_MODULE_NAME = 'app.home.module';
@@ -31778,7 +31809,7 @@ $__System.register('20', ['1f'], function (_export) {
 		}
 	};
 });
-$__System.register('21', ['1a', '1b'], function (_export) {
+$__System.register('22', ['1a', '1b'], function (_export) {
 	var _createClass, _classCallCheck, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME, searchBottomSheetController;
 
 	return {
@@ -31789,7 +31820,6 @@ $__System.register('21', ['1a', '1b'], function (_export) {
 		}],
 		execute: function () {
 			/* global angular */
-			//import searchBottomSheetModel from 	'./app.searchBottomSheet.model.json!json';
 
 			'use strict';
 
@@ -31847,7 +31877,7 @@ $__System.register('21', ['1a', '1b'], function (_export) {
 		}
 	};
 });
-$__System.register('22', ['21'], function (_export) {
+$__System.register('23', ['22'], function (_export) {
 	/* global angular */
 	'use strict';
 
@@ -31864,7 +31894,7 @@ $__System.register('22', ['21'], function (_export) {
 		}
 	};
 });
-$__System.register('23', ['13', '15', '16', '20', '22'], function (_export) {
+$__System.register('24', ['13', '15', '16', '21', '23'], function (_export) {
 	/* global angular */
 
 	'use strict';
@@ -31889,7 +31919,7 @@ $__System.register('23', ['13', '15', '16', '20', '22'], function (_export) {
 		}
 	};
 });
-$__System.register('1', ['2', '3', '23'], function (_export) {
+$__System.register('1', ['2', '3', '24'], function (_export) {
   /* global angular */
   //css
   'use strict';
