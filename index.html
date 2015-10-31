@@ -14,7 +14,7 @@
     </style>		
 	</head>
 
-	<body layout="row" ng-controller="homeController as homeCtrl" ng-cloak="">
+	<body layout="row" ng-controller="homeController as homeCtrl" ng-cloak>
 		
 		<!--left sidenav-->
 		<md-sidenav layout="column" 
@@ -41,9 +41,7 @@
 			
 			<!--toolbar : top navigation menu (NO SEARCH = MAIN)-->
 			<md-toolbar id="topNavigationBar" ng-if="!homeCtrl.showSearch" layout="row" class="md-whiteframe-z2 md-hue-2">
-				
 				<div layout="row" flex layout-fill>
-					
 					<div layout="row" layout-padding layout-align="start center">	
 						<md-button 	class="md-icon-button md-accent" 
 												hide-gt-sm 
@@ -52,73 +50,69 @@
 							<md-icon md-svg-icon="menu_24" ></md-icon>
 						</md-button>
 					</div>
-					
 					<div layout="row" flex layout-padding layout-align="start center">
-						<h4 class="md-header" flex>Angular Material - ES6 Starter App</h4>	
+						<h4 class="md-header" >
+							<span>Angular Material - ES6 Starter App</span>
+						</h4>	
 					</div>
-					
 					<span hide-sm hide-md flex></span>
-
 					<div layout="row"  layout-align="end center">	
-
-
-					
 						<md-menu>
-							
 							<div layout="row" layout-padding >
-								
-							<md-button 	aria-label="Search" 
-													class="md-icon-button md-accent"
-													ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
-								<md-icon md-svg-icon="search_24" ></md-icon>
-							</md-button>								
-										
+								<md-button 	aria-label="Search" 
+														class="md-icon-button md-accent"
+														hide-sm
+														ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
+									<md-icon md-svg-icon="search_24" ></md-icon>
+								</md-button>
 								<md-button 	aria-label="Open configuration menu menu" 
 														class="md-icon-button md-accent" 
 														ng-click="homeCtrl.openConfigurationMenu($mdOpenMenu, $event)">
 									<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
 								</md-button>
 							</div>
-							
 							<md-menu-content width="4">
-								
 								<md-menu-item>
-									
+								<md-button ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
+									<md-icon md-svg-icon="search_24" md-menu-align-target></md-icon>
+									Search
+								</md-button>
+								</md-menu-item>
+								<md-menu-item>
 									<md-button ng-click="homeCtrl.openMyProfile($event)" disabled="{{homeCtrl.user.userLogged ? true : false}}">
-										<md-icon md-svg-icon="person_24" md-menu-align-target></md-icon>
+										<md-icon md-svg-icon="person_24" ></md-icon>
 										my Profile
 									</md-button>
 								</md-menu-item>
-								
 								<md-menu-item>
 									<md-button  ng-click="homeCtrl.openLanguageSettings($event)">
 										<md-icon md-svg-icon="language_24"></md-icon>
 										Language
 									</md-button>
 								</md-menu-item>
-								
 								<md-menu-divider></md-menu-divider>
-								
 								<md-menu-item>
 									<md-button ng-click="homeCtrl.toggleNotifications()">
 										<md-icon md-svg-icon="notifications_{{homeCtrl.notificationsEnabled ? 'off' : 'active'}}_24"></md-icon>
 										{{homeCtrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
 									</md-button>
 								</md-menu-item>
-								
 							</md-menu-content>
-							
 						</md-menu>
 					</div>	
-
-					
 				</div>
 			</md-toolbar>
 			
 			
+ 
+					
+				
+
+			
+			
+			
 			<!--toolbar : top navigation WHEN SEARCH-->
       <md-toolbar id="topSearchBar" class="md-whiteframe-z2 md-hue-1" layout="row" ng-if="homeCtrl.showSearch">
-        
 				<div layout="row" flex layout-fill class="md-toolbar-tools">
           <md-button 	ng-click="homeCtrl.showSearch = !homeCtrl.showSearch" 
 											aria-label="Back"
@@ -138,8 +132,6 @@
 											class="md-icon-button md-accent">
             <md-icon md-svg-icon="search_24"></md-icon>
           </md-button>
-					
-					
           <md-button 	aria-label="Open Settings" 
 											ng-click="homeCtrl.showSearchOptionsSheet($event)"
 											class="md-icon-button md-accent">
@@ -147,7 +139,6 @@
           </md-button>
 					</div>
         </div>
-       
       </md-toolbar>			
 			
 			
@@ -158,10 +149,8 @@
 				<md-content layout="column" md-scroll-y flex class="md-padding">
 				
 				</md-content>
-			</div>
-								
+			</div>				
 		</div>
-				
 		<script type="text/javascript" src="public/js/appBundle.js"></script>						
 	</body>
 </html>
