@@ -56,15 +56,15 @@
 						</h4>	
 					</div>
 					<span hide-sm hide-md flex></span>
-					<div layout="row"  layout-align="end center">	
+					<div layout="row"  layout-align="end center">
+							<md-button 	aria-label="Search" 
+													class="md-icon-button md-accent"
+													hide-sm
+													ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
+								<md-icon md-svg-icon="search_24" ></md-icon>
+							</md-button>	
 						<md-menu>
 							<div layout="row" layout-padding >
-								<md-button 	aria-label="Search" 
-														class="md-icon-button md-accent"
-														hide-sm
-														ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
-									<md-icon md-svg-icon="search_24" ></md-icon>
-								</md-button>
 								<md-button 	aria-label="Open configuration menu menu" 
 														class="md-icon-button md-accent" 
 														ng-click="homeCtrl.openConfigurationMenu($mdOpenMenu, $event)">
