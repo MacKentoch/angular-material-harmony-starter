@@ -31339,6 +31339,7 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 				_createClass(homeController, [{
 					key: 'init',
 					value: function init() {
+						this.showSearch = false;
 						this.originatorEv = null;
 						this.notificationsEnabled = false;
 						this.user = angular.extend({}, {
@@ -31356,10 +31357,22 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 						this.notificationsEnabled = !this.notificationsEnabled;
 					}
 				}, {
-					key: 'openMenu',
-					value: function openMenu($mdOpenMenu, ev) {
+					key: 'openConfigurationMenu',
+					value: function openConfigurationMenu($mdOpenMenu, ev) {
 						this.originatorEv = ev;
 						$mdOpenMenu(ev);
+					}
+				}, {
+					key: 'openMyProfile',
+					value: function openMyProfile(event) {
+						this.$mdDialog.show(this.$mdDialog.alert().targetEvent(event || this.originatorEv).clickOutsideToClose(true).parent('body').title('My profile').content('Content coming soon').ok('see you soon'));
+						this.originatorEv = null;
+					}
+				}, {
+					key: 'openLanguageSettings',
+					value: function openLanguageSettings(event) {
+						this.$mdDialog.show(this.$mdDialog.alert().targetEvent(event || this.originatorEv).clickOutsideToClose(true).parent('body').title('Language settings').content('Content coming soon, please wait.').ok('see you soon'));
+						this.originatorEv = null;
 					}
 				}]);
 

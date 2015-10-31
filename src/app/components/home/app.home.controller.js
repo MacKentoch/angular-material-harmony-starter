@@ -13,6 +13,7 @@ class homeController{
 	}
 	
 	init(){
+		this.showSearch						= false;
 		this.originatorEv					= null;
 		this.notificationsEnabled	= false;
 		this.user									= angular.extend({}, {
@@ -36,10 +37,10 @@ class homeController{
 	
 	
 	
-	openMyProfile() {
+	openMyProfile(event) {
 		this.$mdDialog.show(
 			this.$mdDialog.alert()
-				.targetEvent(this.originatorEv)
+				.targetEvent(event || this.originatorEv)
 				.clickOutsideToClose(true)
 				.parent('body')
 				.title('My profile')
@@ -47,7 +48,21 @@ class homeController{
 				.ok('see you soon')
 		);
 		this.originatorEv = null;
-	};	
+	}
+	
+	
+	openLanguageSettings(event){
+		this.$mdDialog.show(
+			this.$mdDialog.alert()
+				.targetEvent(event || this.originatorEv)
+				.clickOutsideToClose(true)
+				.parent('body')
+				.title('Language settings')
+				.content('Content coming soon, please wait.')
+				.ok('see you soon')
+		);
+		this.originatorEv = null;		
+	}	
 	
 	
 }

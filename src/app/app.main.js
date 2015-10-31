@@ -1,7 +1,7 @@
 /* global angular */
 import './app.vendors';
-import appConfig			from './components/config/app.config.function';
-import coreModule			from './components/core/app.core.module';
+import appConfig			from './config/app.config.function';
+import coreModule			from './core/app.core.module';
 import homeCtrlModule from './components/home/app.home.module';
 
 const APP_MODULE_NAME = 'appDemo';
