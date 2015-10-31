@@ -1,24 +1,14 @@
 <md-bottom-sheet class="md-list md-has-header"> 
-	
-	<md-subheader>Search settings</md-subheader> 
-	
-	<md-list ng-controller="ListCtrl" ng-cloak>
-		<md-subheader class="md-no-sticky">Single Action Checkboxes</md-subheader>
-		<md-list-item ng-repeat="topping in toppings">
-			<p> {{ topping.name }} </p>
-			<md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
-		</md-list-item>	
+		
+	<md-list>
+		<md-subheader class="md-no-sticky">Search by</md-subheader>
+		
+		<md-list-item ng-repeat="option in searchBottomSheetCtrl.searchSheetModel track by $index"
+									ng-click="searchBottomSheetCtrl.optionClick($index)">
+			<p> {{ option.name }} </p>
+			<md-checkbox class="md-secondary" aria-label="{{option.name}}-check" md-no-ink ng-model="option.checked" ng-click="searchBottomSheetCtrl.checkBoxClicked($index)"></md-checkbox>
+		</md-list-item>
+			
 	</md-list>	
-	
-	
-	<!--<md-list> 
-		<md-item ng-repeat="item in items">
-			<md-item-content md-ink-ripple flex class="inset"> 
-				<a flex aria-label="{{item.name}}" ng-click="listItemClick($index)"> 
-					<span class="md-inline-list-icon-label">{{ item.name }}</span> 
-				</a>
-			</md-item-content> 
-		</md-item> 
-	</md-list>-->
 	
 </md-bottom-sheet>

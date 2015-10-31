@@ -1,4 +1,12 @@
 /* global angular */
+import searchBottomSheetModel 						from 	'../searchBottomSheet/app.searchBottomSheet.model.json!json';
+import {
+	SEARCH_BOTTOM_SHEET_CONTROLLER_NAME,
+	SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME
+}																					from '../searchBottomSheet/app.searchBottomSheet.controller';
+
+import searchBottomSheetTemplate 					from '../searchBottomSheet/app.searchBottomSheet.template.html!text';
+
 const HOME_CONTROLLER_NAME 		= 'homeController';
 const HOME_CONTROLLERAS_NAME 	= 'homeCtrl';
 
@@ -8,16 +16,17 @@ class homeController{
 	constructor($mdSidenav, $mdDialog, $mdBottomSheet){
 		this.$mdSidenav 		= $mdSidenav;
 		this.$mdDialog			= $mdDialog;
-		this.$mdBottomSheet = $mdBottomSheet
+		this.$mdBottomSheet = $mdBottomSheet;
 		
 		this.init();
 	}
 	
 	init(){
-		this.showSearch						= false;
-		this.originatorEv					= null;
-		this.notificationsEnabled	= false;
-		this.user									= angular.extend({}, {
+		this.showSearch							= false;
+		this.searchBottomSheetModel = angular.copy(searchBottomSheetModel);
+		this.originatorEv						= null;
+		this.notificationsEnabled		= false;
+		this.user										= angular.extend({}, {
 			'userLogged' :	false
 		});
 	}
@@ -38,9 +47,13 @@ class homeController{
 	showSearchOptionsSheet(event){
     this.alert = '';
     this.$mdBottomSheet.show({
-      template: '<md-bottom-sheet class="md-list md-has-header"> <md-subheader>Settings</md-subheader> <md-list> <md-item ng-repeat="item in items"><md-item-content md-ink-ripple flex class="inset"> <a flex aria-label="{{item.name}}" ng-click="listItemClick($index)"> <span class="md-inline-list-icon-label">{{ item.name }}</span> </a></md-item-content> </md-item> </md-list></md-bottom-sheet>',
-      controller: 'ListBottomSheetCtrl',
-      targetEvent: event || this.originatorEv
+      template		: searchBottomSheetTemplate,
+      controller	: SEARCH_BOTTOM_SHEET_CONTROLLER_NAME,
+			controllerAs: SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME,
+      targetEvent	: event || this.originatorEv,
+			resolve			: {
+				'searchBottomSheetModel' : () => this.searchBottomSheetModel
+			}
     }).then(
 			(clickedItem) => { this.alert = clickedItem.name + ' clicked!';}
 		);		

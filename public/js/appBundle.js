@@ -566,6 +566,229 @@
 
 })(typeof self != 'undefined' ? self : global);
 
+(function(__global) {
+  var loader = $__System;
+  var indexOf = Array.prototype.indexOf || function(item) {
+    for (var i = 0, l = this.length; i < l; i++)
+      if (this[i] === item)
+        return i;
+    return -1;
+  }
+
+  var commentRegEx = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg;
+  var cjsRequirePre = "(?:^|[^$_a-zA-Z\\xA0-\\uFFFF.])";
+  var cjsRequirePost = "\\s*\\(\\s*(\"([^\"]+)\"|'([^']+)')\\s*\\)";
+  var fnBracketRegEx = /\(([^\)]*)\)/;
+  var wsRegEx = /^\s+|\s+$/g;
+  
+  var requireRegExs = {};
+
+  function getCJSDeps(source, requireIndex) {
+
+    // remove comments
+    source = source.replace(commentRegEx, '');
+
+    // determine the require alias
+    var params = source.match(fnBracketRegEx);
+    var requireAlias = (params[1].split(',')[requireIndex] || 'require').replace(wsRegEx, '');
+
+    // find or generate the regex for this requireAlias
+    var requireRegEx = requireRegExs[requireAlias] || (requireRegExs[requireAlias] = new RegExp(cjsRequirePre + requireAlias + cjsRequirePost, 'g'));
+
+    requireRegEx.lastIndex = 0;
+
+    var deps = [];
+
+    var match;
+    while (match = requireRegEx.exec(source))
+      deps.push(match[2] || match[3]);
+
+    return deps;
+  }
+
+  /*
+    AMD-compatible require
+    To copy RequireJS, set window.require = window.requirejs = loader.amdRequire
+  */
+  function require(names, callback, errback, referer) {
+    // in amd, first arg can be a config object... we just ignore
+    if (typeof names == 'object' && !(names instanceof Array))
+      return require.apply(null, Array.prototype.splice.call(arguments, 1, arguments.length - 1));
+
+    // amd require
+    if (typeof names == 'string' && typeof callback == 'function')
+      names = [names];
+    if (names instanceof Array) {
+      var dynamicRequires = [];
+      for (var i = 0; i < names.length; i++)
+        dynamicRequires.push(loader['import'](names[i], referer));
+      Promise.all(dynamicRequires).then(function(modules) {
+        if (callback)
+          callback.apply(null, modules);
+      }, errback);
+    }
+
+    // commonjs require
+    else if (typeof names == 'string') {
+      var module = loader.get(names);
+      return module.__useDefault ? module['default'] : module;
+    }
+
+    else
+      throw new TypeError('Invalid require');
+  }
+
+  function define(name, deps, factory) {
+    if (typeof name != 'string') {
+      factory = deps;
+      deps = name;
+      name = null;
+    }
+    if (!(deps instanceof Array)) {
+      factory = deps;
+      deps = ['require', 'exports', 'module'].splice(0, factory.length);
+    }
+
+    if (typeof factory != 'function')
+      factory = (function(factory) {
+        return function() { return factory; }
+      })(factory);
+
+    // in IE8, a trailing comma becomes a trailing undefined entry
+    if (deps[deps.length - 1] === undefined)
+      deps.pop();
+
+    // remove system dependencies
+    var requireIndex, exportsIndex, moduleIndex;
+    
+    if ((requireIndex = indexOf.call(deps, 'require')) != -1) {
+      
+      deps.splice(requireIndex, 1);
+
+      // only trace cjs requires for non-named
+      // named defines assume the trace has already been done
+      if (!name)
+        deps = deps.concat(getCJSDeps(factory.toString(), requireIndex));
+    }
+
+    if ((exportsIndex = indexOf.call(deps, 'exports')) != -1)
+      deps.splice(exportsIndex, 1);
+    
+    if ((moduleIndex = indexOf.call(deps, 'module')) != -1)
+      deps.splice(moduleIndex, 1);
+
+    var define = {
+      name: name,
+      deps: deps,
+      execute: function(req, exports, module) {
+
+        var depValues = [];
+        for (var i = 0; i < deps.length; i++)
+          depValues.push(req(deps[i]));
+
+        module.uri = module.id;
+
+        module.config = function() {};
+
+        // add back in system dependencies
+        if (moduleIndex != -1)
+          depValues.splice(moduleIndex, 0, module);
+        
+        if (exportsIndex != -1)
+          depValues.splice(exportsIndex, 0, exports);
+        
+        if (requireIndex != -1) 
+          depValues.splice(requireIndex, 0, function(names, callback, errback) {
+            if (typeof names == 'string' && typeof callback != 'function')
+              return req(names);
+            return require.call(loader, names, callback, errback, module.id);
+          });
+
+        var output = factory.apply(exportsIndex == -1 ? __global : exports, depValues);
+
+        if (typeof output == 'undefined' && module)
+          output = module.exports;
+
+        if (typeof output != 'undefined')
+          return output;
+      }
+    };
+
+    // anonymous define
+    if (!name) {
+      // already defined anonymously -> throw
+      if (lastModule.anonDefine)
+        throw new TypeError('Multiple defines for anonymous module');
+      lastModule.anonDefine = define;
+    }
+    // named define
+    else {
+      // if we don't have any other defines,
+      // then let this be an anonymous define
+      // this is just to support single modules of the form:
+      // define('jquery')
+      // still loading anonymously
+      // because it is done widely enough to be useful
+      if (!lastModule.anonDefine && !lastModule.isBundle) {
+        lastModule.anonDefine = define;
+      }
+      // otherwise its a bundle only
+      else {
+        // if there is an anonDefine already (we thought it could have had a single named define)
+        // then we define it now
+        // this is to avoid defining named defines when they are actually anonymous
+        if (lastModule.anonDefine && lastModule.anonDefine.name)
+          loader.registerDynamic(lastModule.anonDefine.name, lastModule.anonDefine.deps, false, lastModule.anonDefine.execute);
+
+        lastModule.anonDefine = null;
+      }
+
+      // note this is now a bundle
+      lastModule.isBundle = true;
+
+      // define the module through the register registry
+      loader.registerDynamic(name, define.deps, false, define.execute);
+    }
+  }
+  define.amd = {};
+
+  // adds define as a global (potentially just temporarily)
+  function createDefine(loader) {
+    lastModule.anonDefine = null;
+    lastModule.isBundle = false;
+
+    // ensure no NodeJS environment detection
+    var oldModule = __global.module;
+    var oldExports = __global.exports;
+    var oldDefine = __global.define;
+
+    __global.module = undefined;
+    __global.exports = undefined;
+    __global.define = define;
+
+    return function() {
+      __global.define = oldDefine;
+      __global.module = oldModule;
+      __global.exports = oldExports;
+    };
+  }
+
+  var lastModule = {
+    isBundle: false,
+    anonDefine: null
+  };
+
+  loader.set('@@amd-helpers', loader.newModule({
+    createDefine: createDefine,
+    require: require,
+    define: define,
+    lastModule: lastModule
+  }));
+  loader.amdDefine = define;
+  loader.amdRequire = require;
+})(typeof self != 'undefined' ? self : global);
+
+"bundle";
 $__System.register("2", [], function() { return { setters: [], execute: function() {} } });
 
 $__System.register("3", [], function() { return { setters: [], execute: function() {} } });
@@ -31334,8 +31557,26 @@ $__System.registerDynamic("1b", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.register('1c', ['1a', '1b'], function (_export) {
-	var _createClass, _classCallCheck, HOME_CONTROLLER_NAME, HOME_CONTROLLERAS_NAME, homeController;
+$__System.registerDynamic("1c", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = [{
+    "name": "name",
+    "checked": true,
+    "icon": "share"
+  }, {
+    "name": "date",
+    "checked": false,
+    "icon": "upload"
+  }];
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.register('1d', ['1a', '1b'], function (_export) {
+	var _createClass, _classCallCheck, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME, searchBottomSheetController;
 
 	return {
 		setters: [function (_a) {
@@ -31345,17 +31586,102 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 		}],
 		execute: function () {
 			/* global angular */
+			//import searchBottomSheetModel from 	'./app.searchBottomSheet.model.json!json';
+
+			'use strict';
+
+			SEARCH_BOTTOM_SHEET_CONTROLLER_NAME = 'searchBottomSheetController';
+			SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME = 'searchBottomSheetCtrl';
+
+			searchBottomSheetController = (function () {
+				function searchBottomSheetController($mdBottomSheet, searchBottomSheetModel) {
+					_classCallCheck(this, searchBottomSheetController);
+
+					this.$mdBottomSheet = $mdBottomSheet;
+					this.searchBottomSheetModel = searchBottomSheetModel;
+					this.init();
+				}
+
+				_createClass(searchBottomSheetController, [{
+					key: 'init',
+					value: function init() {
+						this.searchSheetModel = this.searchBottomSheetModel;
+						console.info('searchBottomSheetController : model : ' + this.searchSheetModel);
+						console.dir(this.searchSheetModel);
+					}
+				}, {
+					key: 'optionClick',
+					value: function optionClick($index) {
+						this.updateCheckBoxModel($index);
+						var clickedItem = this.searchSheetModel[$index];
+						this.$mdBottomSheet.hide(clickedItem);
+					}
+				}, {
+					key: 'checkBoxClicked',
+					value: function checkBoxClicked($index) {
+						this.updateCheckBoxModel($index);
+					}
+				}, {
+					key: 'updateCheckBoxModel',
+					value: function updateCheckBoxModel(selectIndex) {
+						angular.forEach(this.searchSheetModel, function (value, index) {
+							return value.checked = false;
+						}); //loop to reset all checked option
+						this.searchSheetModel[selectIndex].checked = true; //then check selected one (faster when done outside a loop)		
+					}
+				}]);
+
+				return searchBottomSheetController;
+			})();
+
+			searchBottomSheetController.$inject = ['$mdBottomSheet', 'searchBottomSheetModel'];
+
+			_export('default', searchBottomSheetController);
+
+			_export('SEARCH_BOTTOM_SHEET_CONTROLLER_NAME', SEARCH_BOTTOM_SHEET_CONTROLLER_NAME);
+
+			_export('SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME', SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME);
+		}
+	};
+});
+(function() {
+var _removeDefine = $__System.get("@@amd-helpers").createDefine();
+define("1e", [], function() {
+  return "<md-bottom-sheet class=\"md-list md-has-header\"> \n\t\t\n\t<md-list>\n\t\t<md-subheader class=\"md-no-sticky\">Search by</md-subheader>\n\t\t\n\t\t<md-list-item ng-repeat=\"option in searchBottomSheetCtrl.searchSheetModel track by $index\"\n\t\t\t\t\t\t\t\t\tng-click=\"searchBottomSheetCtrl.optionClick($index)\">\n\t\t\t<p> {{ option.name }} </p>\n\t\t\t<md-checkbox class=\"md-secondary\" aria-label=\"{{option.name}}-check\" md-no-ink ng-model=\"option.checked\" ng-click=\"searchBottomSheetCtrl.checkBoxClicked($index)\"></md-checkbox>\n\t\t</md-list-item>\n\t\t\t\n\t</md-list>\t\n\t\n</md-bottom-sheet>";
+});
+
+_removeDefine();
+})();
+$__System.register('1f', ['1a', '1b', '1c', '1d', '1e'], function (_export) {
+	var _createClass, _classCallCheck, searchBottomSheetModel, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME, searchBottomSheetTemplate, HOME_CONTROLLER_NAME, HOME_CONTROLLERAS_NAME, homeController;
+
+	return {
+		setters: [function (_a) {
+			_createClass = _a['default'];
+		}, function (_b) {
+			_classCallCheck = _b['default'];
+		}, function (_c) {
+			searchBottomSheetModel = _c['default'];
+		}, function (_d) {
+			SEARCH_BOTTOM_SHEET_CONTROLLER_NAME = _d.SEARCH_BOTTOM_SHEET_CONTROLLER_NAME;
+			SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME = _d.SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME;
+		}, function (_e) {
+			searchBottomSheetTemplate = _e['default'];
+		}],
+		execute: function () {
+			/* global angular */
 			'use strict';
 
 			HOME_CONTROLLER_NAME = 'homeController';
 			HOME_CONTROLLERAS_NAME = 'homeCtrl';
 
 			homeController = (function () {
-				function homeController($mdSidenav, $mdDialog) {
+				function homeController($mdSidenav, $mdDialog, $mdBottomSheet) {
 					_classCallCheck(this, homeController);
 
 					this.$mdSidenav = $mdSidenav;
 					this.$mdDialog = $mdDialog;
+					this.$mdBottomSheet = $mdBottomSheet;
 
 					this.init();
 				}
@@ -31364,6 +31690,7 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 					key: 'init',
 					value: function init() {
 						this.showSearch = false;
+						this.searchBottomSheetModel = angular.copy(searchBottomSheetModel);
 						this.originatorEv = null;
 						this.notificationsEnabled = false;
 						this.user = angular.extend({}, {
@@ -31387,6 +31714,26 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 						$mdOpenMenu(ev);
 					}
 				}, {
+					key: 'showSearchOptionsSheet',
+					value: function showSearchOptionsSheet(event) {
+						var _this = this;
+
+						this.alert = '';
+						this.$mdBottomSheet.show({
+							template: searchBottomSheetTemplate,
+							controller: SEARCH_BOTTOM_SHEET_CONTROLLER_NAME,
+							controllerAs: SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME,
+							targetEvent: event || this.originatorEv,
+							resolve: {
+								'searchBottomSheetModel': function searchBottomSheetModel() {
+									return _this.searchBottomSheetModel;
+								}
+							}
+						}).then(function (clickedItem) {
+							_this.alert = clickedItem.name + ' clicked!';
+						});
+					}
+				}, {
 					key: 'openMyProfile',
 					value: function openMyProfile(event) {
 						this.$mdDialog.show(this.$mdDialog.alert().targetEvent(event || this.originatorEv).clickOutsideToClose(true).parent('body').title('My profile').content('Content coming soon').ok('see you soon'));
@@ -31403,7 +31750,7 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 				return homeController;
 			})();
 
-			homeController.$inject = ['$mdSidenav', '$mdDialog'];
+			homeController.$inject = ['$mdSidenav', '$mdDialog', '$mdBottomSheet'];
 
 			_export('default', homeController);
 
@@ -31413,16 +31760,16 @@ $__System.register('1c', ['1a', '1b'], function (_export) {
 		}
 	};
 });
-$__System.register('1d', ['1c'], function (_export) {
+$__System.register('20', ['1f'], function (_export) {
 	/* global angular */
 	'use strict';
 
 	var homeController, HOME_CONTROLLER_NAME, HOME_CONTROLLERAS_NAME, HOME_MODULE_NAME;
 	return {
-		setters: [function (_c) {
-			homeController = _c['default'];
-			HOME_CONTROLLER_NAME = _c.HOME_CONTROLLER_NAME;
-			HOME_CONTROLLERAS_NAME = _c.HOME_CONTROLLERAS_NAME;
+		setters: [function (_f) {
+			homeController = _f['default'];
+			HOME_CONTROLLER_NAME = _f.HOME_CONTROLLER_NAME;
+			HOME_CONTROLLERAS_NAME = _f.HOME_CONTROLLERAS_NAME;
 		}],
 		execute: function () {
 			HOME_MODULE_NAME = 'app.home.module';
@@ -31431,37 +31778,126 @@ $__System.register('1d', ['1c'], function (_export) {
 		}
 	};
 });
-$__System.register('1e', ['13', '15', '16', '1d'], function (_export) {
-								/* global angular */
-								'use strict';
+$__System.register('21', ['1a', '1b'], function (_export) {
+	var _createClass, _classCallCheck, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME, searchBottomSheetController;
 
-								var appConfig, coreModule, homeCtrlModule, APP_MODULE_NAME, APP_MODULE_INJECT, appModule;
-								return {
-																setters: [function (_) {}, function (_2) {
-																								appConfig = _2['default'];
-																}, function (_3) {
-																								coreModule = _3['default'];
-																}, function (_d) {
-																								homeCtrlModule = _d['default'];
-																}],
-																execute: function () {
-																								APP_MODULE_NAME = 'appDemo';
-																								APP_MODULE_INJECT = [coreModule.name, homeCtrlModule.name];
-																								appModule = angular.module(APP_MODULE_NAME, APP_MODULE_INJECT).config(appConfig);
+	return {
+		setters: [function (_a) {
+			_createClass = _a['default'];
+		}, function (_b) {
+			_classCallCheck = _b['default'];
+		}],
+		execute: function () {
+			/* global angular */
+			//import searchBottomSheetModel from 	'./app.searchBottomSheet.model.json!json';
 
-																								_export('default', appModule);
-																}
-								};
+			'use strict';
+
+			SEARCH_BOTTOM_SHEET_CONTROLLER_NAME = 'searchBottomSheetController';
+			SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME = 'searchBottomSheetCtrl';
+
+			searchBottomSheetController = (function () {
+				function searchBottomSheetController($mdBottomSheet, searchBottomSheetModel) {
+					_classCallCheck(this, searchBottomSheetController);
+
+					this.$mdBottomSheet = $mdBottomSheet;
+					this.searchBottomSheetModel = searchBottomSheetModel;
+					this.init();
+				}
+
+				_createClass(searchBottomSheetController, [{
+					key: 'init',
+					value: function init() {
+						this.searchSheetModel = this.searchBottomSheetModel;
+						console.info('searchBottomSheetController : model : ' + this.searchSheetModel);
+						console.dir(this.searchSheetModel);
+					}
+				}, {
+					key: 'optionClick',
+					value: function optionClick($index) {
+						this.updateCheckBoxModel($index);
+						var clickedItem = this.searchSheetModel[$index];
+						this.$mdBottomSheet.hide(clickedItem);
+					}
+				}, {
+					key: 'checkBoxClicked',
+					value: function checkBoxClicked($index) {
+						this.updateCheckBoxModel($index);
+					}
+				}, {
+					key: 'updateCheckBoxModel',
+					value: function updateCheckBoxModel(selectIndex) {
+						angular.forEach(this.searchSheetModel, function (value, index) {
+							return value.checked = false;
+						}); //loop to reset all checked option
+						this.searchSheetModel[selectIndex].checked = true; //then check selected one (faster when done outside a loop)		
+					}
+				}]);
+
+				return searchBottomSheetController;
+			})();
+
+			searchBottomSheetController.$inject = ['$mdBottomSheet', 'searchBottomSheetModel'];
+
+			_export('default', searchBottomSheetController);
+
+			_export('SEARCH_BOTTOM_SHEET_CONTROLLER_NAME', SEARCH_BOTTOM_SHEET_CONTROLLER_NAME);
+
+			_export('SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME', SEARCH_BOTTOM_SHEET_CONTROLLERAS_NAME);
+		}
+	};
 });
-$__System.register('1', ['2', '3', '1e'], function (_export) {
+$__System.register('22', ['21'], function (_export) {
+	/* global angular */
+	'use strict';
+
+	var searchBottomSheetController, SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, SEARCH_BOTTOM_SHEET_MODULE_NAME;
+	return {
+		setters: [function (_) {
+			searchBottomSheetController = _['default'];
+			SEARCH_BOTTOM_SHEET_CONTROLLER_NAME = _.SEARCH_BOTTOM_SHEET_CONTROLLER_NAME;
+		}],
+		execute: function () {
+			SEARCH_BOTTOM_SHEET_MODULE_NAME = 'app.searchBottomSheet.module';
+
+			_export('default', angular.module(SEARCH_BOTTOM_SHEET_MODULE_NAME, []).controller(SEARCH_BOTTOM_SHEET_CONTROLLER_NAME, searchBottomSheetController));
+		}
+	};
+});
+$__System.register('23', ['13', '15', '16', '20', '22'], function (_export) {
+	/* global angular */
+
+	'use strict';
+
+	var appConfig, coreModule, homeCtrlModule, searchBottomSheetModule, APP_MODULE_NAME, APP_MODULE_INJECT, appModule;
+	return {
+		setters: [function (_) {}, function (_2) {
+			appConfig = _2['default'];
+		}, function (_3) {
+			coreModule = _3['default'];
+		}, function (_4) {
+			homeCtrlModule = _4['default'];
+		}, function (_5) {
+			searchBottomSheetModule = _5['default'];
+		}],
+		execute: function () {
+			APP_MODULE_NAME = 'appDemo';
+			APP_MODULE_INJECT = [coreModule.name, homeCtrlModule.name, searchBottomSheetModule.name];
+			appModule = angular.module(APP_MODULE_NAME, APP_MODULE_INJECT).config(appConfig);
+
+			_export('default', appModule);
+		}
+	};
+});
+$__System.register('1', ['2', '3', '23'], function (_export) {
   /* global angular */
   //css
   'use strict';
 
   var appModule;
   return {
-    setters: [function (_) {}, function (_2) {}, function (_e) {
-      appModule = _e['default'];
+    setters: [function (_) {}, function (_2) {}, function (_3) {
+      appModule = _3['default'];
     }],
     execute: function () {
 

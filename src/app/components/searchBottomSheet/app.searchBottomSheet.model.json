@@ -1,4 +1,4 @@
 [
-    { "name": "By name", "icon": "share" },
-    { "name": "By date", "icon": "upload" }
+    { "name": "name", "checked" : true, "icon": "share" },
+    { "name": "date", "checked" : false, "icon": "upload" }
 ]
