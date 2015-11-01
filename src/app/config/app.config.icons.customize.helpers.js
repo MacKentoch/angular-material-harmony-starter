@@ -5,6 +5,7 @@ const ROOT_NAVIGATION_ICONS_URL	= 'public/svg/navigation/';
 const ROOT_ALERT_ICONS_URL 			= 'public/svg/alert/';
 const ROOT_ACTION_ICONS_URL 		= 'public/svg/action/';
 const ROOT_SOCIAL_ICONS_URL 		= 'public/svg/social/';
+const ROOT_NOTIFICATION					= 'public/svg/notification/';
 
 const ICON_TANK = [
 	
@@ -29,6 +30,24 @@ const ICON_TANK = [
 			}										
 		]
 	},
+	
+	{
+		name : 'event_note',
+		icons : [
+			{
+				size 	: 18,
+				url		: `${ROOT_NOTIFICATION}ic_event_note_18px.svg`	
+			},
+			{
+				size 	: 24,
+				url		: `${ROOT_NOTIFICATION}ic_event_note_24px.svg`
+			},
+			{
+				size 	: 48,
+				url		: `${ROOT_NOTIFICATION}ic_event_note_48px.svg`
+			}										
+		]
+	},	
 	
 	{
 		name : 'moreVertical',
