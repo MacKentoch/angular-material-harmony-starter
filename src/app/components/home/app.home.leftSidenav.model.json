@@ -1,0 +1,25 @@
+[
+	{	
+		"name" 	: "Main", 
+		"menus" : [
+			{
+				"name" 			: "home",
+				"svgIcon"	: "home_24"
+			},
+			{
+				"name" 			: "what's up",
+				"svgIcon"	: "event_note_24"
+			}		
+		]		
+	},
+	
+	{	
+		"name" 	: "Account", 
+		"menus" : [
+			{
+				"name" 			: "information",
+				"svgIcon"	: "person_24"
+			}	
+		]		
+	}	
+]

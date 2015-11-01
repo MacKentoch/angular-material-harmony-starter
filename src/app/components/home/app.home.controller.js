@@ -1,5 +1,6 @@
 /* global angular */
 import searchBottomSheetModel 						from 	'../searchBottomSheet/app.searchBottomSheet.model.json!json';
+import leftSidenavModel 									from 	'./app.home.leftSidenav.model.json!json';
 import {
 	initSearchModel,
 	initUserModel
@@ -32,6 +33,7 @@ class homeController{
 		this.notificationsEnabled		= false;
 		this.user										= initUserModel();
 		this.search 								= initSearchModel();		//search model (input + 'by' = search option)
+		this.leftSidenavModel				= leftSidenavModel;			//left sidenav menu model
 	}
 	
 	toggleSidenav(menuId) {

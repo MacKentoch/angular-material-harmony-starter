@@ -31,7 +31,17 @@
 					<div class="md-caption">email@domainname.com</div>
 				</div>
 			</md-toolbar>
-		
+			<!--menu-->
+			<md-list>
+				<div ng-repeat="group in homeCtrl.leftSidenavModel track by $index" layout="column">						
+					<md-subheader class="transparentBackGround">{{group.name}}</md-subheader>
+					<md-list-item ng-repeat="menu in group.menus track by $index"
+												ng-click="homeCtrl.navigateTo(menu.uiSref, $event)">
+						<md-icon md-svg-icon="{{menu.svgIcon}}"></md-icon>
+						<p> {{ menu.name }} </p>
+					</md-list-item>												
+				</div>
+			</md-list>		
 		</md-sidenav>
 			
 			

@@ -15,5 +15,8 @@
 #topSearchBar {
   height: 80px; }
 
+.transparentBackGround {
+  background-color: transparent !important; }
+
 body {
   background-color: #F1F1F1; }

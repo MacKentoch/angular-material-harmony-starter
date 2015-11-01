@@ -28,7 +28,17 @@
 					<div class="md-caption">email@domainname.com</div>
 				</div>
 			</md-toolbar>
-		
+			<!--menu-->
+			<md-list>
+				<div ng-repeat="group in homeCtrl.leftSidenavModel track by $index" layout="column">						
+					<md-subheader class="transparentBackGround">{{group.name}}</md-subheader>
+					<md-list-item ng-repeat="menu in group.menus track by $index"
+												ng-click="homeCtrl.navigateTo(menu.uiSref, $event)">
+						<md-icon md-svg-icon="{{menu.svgIcon}}"></md-icon>
+						<p> {{ menu.name }} </p>
+					</md-list-item>												
+				</div>
+			</md-list>	
 		</md-sidenav>
 			
 			
@@ -51,46 +61,83 @@
 					<div layout="row" flex layout-padding layout-align="start center">
 						<h4 class="md-header" flex>Angular Material - ES6 Starter App</h4>	
 					</div>
-					
 					<span hide-sm hide-md flex></span>
-
-					<div layout="row" layout-align="end center">	
+					<div layout="row"  layout-align="end center">
+							<md-button 	aria-label="Search" 
+													class="md-icon-button md-accent"
+													hide-sm
+													ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
+								<md-icon md-svg-icon="search_24" ></md-icon>
+							</md-button>	
 						<md-menu>
-							
-							<div layout="row" layout-padding>							
-								<md-button 	aria-label="Open phone interactions menu" 
+							<div layout="row" layout-padding >
+								<md-button 	aria-label="Open configuration menu menu" 
 														class="md-icon-button md-accent" 
-														ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+														ng-click="homeCtrl.openConfigurationMenu($mdOpenMenu, $event)">
 									<md-icon md-menu-origin md-svg-icon="moreVertical"></md-icon>
 								</md-button>
 							</div>
-							
 							<md-menu-content width="4">
 								<md-menu-item>
-									<md-button ng-click="ctrl.redial($event)">
-										<!--<md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>-->
-										Redial
+								<md-button ng-click="homeCtrl.showSearch = !homeCtrl.showSearch">
+									<md-icon md-svg-icon="search_24" md-menu-align-target></md-icon>
+									Search
+								</md-button>
+								</md-menu-item>
+								<md-menu-item>
+									<md-button ng-click="homeCtrl.openMyProfile($event)" disabled="{{homeCtrl.user.userLogged ? true : false}}">
+										<md-icon md-svg-icon="person_24" ></md-icon>
+										my Profile
 									</md-button>
 								</md-menu-item>
 								<md-menu-item>
-									<md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-										<!--<md-icon md-svg-icon="call:voicemail"></md-icon>-->
-										Check voicemail
+									<md-button  ng-click="homeCtrl.openLanguageSettings($event)">
+										<md-icon md-svg-icon="language_24"></md-icon>
+										Language
 									</md-button>
 								</md-menu-item>
 								<md-menu-divider></md-menu-divider>
 								<md-menu-item>
-									<md-button ng-click="ctrl.toggleNotifications()">
-										<!--<md-icon md-svg-icon="social:notifications-{{ctrl.notificationsEnabled ? 'off' : 'on'}}"></md-icon>-->
-										{{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+									<md-button ng-click="homeCtrl.toggleNotifications()">
+										<md-icon md-svg-icon="notifications_{{homeCtrl.notificationsEnabled ? 'off' : 'active'}}_24"></md-icon>
+										{{homeCtrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
 									</md-button>
 								</md-menu-item>
 							</md-menu-content>
 						</md-menu>
 					</div>	
-					
 				</div>
 			</md-toolbar>
+
+			<!--toolbar : top navigation WHEN SEARCH-->
+      <md-toolbar id="topSearchBar" class="md-whiteframe-z2 md-hue-1" layout="row" ng-if="homeCtrl.showSearch">
+				<div layout="row" flex layout-fill class="md-toolbar-tools">
+          <md-button 	ng-click="homeCtrl.showSearch = !homeCtrl.showSearch" 
+											aria-label="Back"
+											class="md-icon-button md-accent">
+						<md-icon md-svg-icon="arrow_back_24"></md-icon>
+          </md-button>
+          <h3  hide-sm flex="10">
+            Back
+          </h3>
+          <md-input-container  flex>
+            <label for="searchInput">enter search</label>
+            <input id="searchInput" type="text" ng-model="homeCtrl.search.what">
+          </md-input-container>
+					<div layout="row" layout-padding >
+          <md-button 	aria-label="Search" 
+											ng-click="homeCtrl.showSearch = !homeCtrl.showSearch"
+											class="md-icon-button md-accent">
+            <md-icon md-svg-icon="search_24"></md-icon>
+          </md-button>
+          <md-button 	aria-label="Open Settings" 
+											ng-click="homeCtrl.showSearchOptionsSheet($event)"
+											class="md-icon-button md-accent">
+						<md-icon md-svg-icon="moreVertical"></md-icon>
+          </md-button>
+					</div>
+        </div>
+      </md-toolbar>	
 
 			<!--content-->
 			<div layout="column" flex id="content">
