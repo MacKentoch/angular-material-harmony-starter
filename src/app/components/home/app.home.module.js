@@ -2,7 +2,7 @@
 import homeController, {
 	HOME_CONTROLLER_NAME,
 	HOME_CONTROLLERAS_NAME
-}	from './app.home.controller';
+}													from './app.home.controller';
 
 const HOME_MODULE_NAME = 'app.home.module';
 

@@ -1,0 +1,95 @@
+<md-dialog>
+  
+  <div id="modalLogin" layout="column" ng-if="siginCtrl.isLoggin" layout-align="center center" layout-fill>
+    <div class="modalContent md-whiteframe-z1" layout="column">
+      
+      <md-toolbar class="md-hue-2" layout="row">
+        <h2 class="md-toolbar-tools">
+          <span>Login</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="siginCtrl.cancel()">
+          <md-icon md-svg-src="close_24" aria-label="Close dialog"></md-icon>
+        </md-button>        
+      </md-toolbar>
+      
+      <md-content class="md-padding" layout="column">
+        
+        <md-input-container>
+          <label>EmailAddress</label>
+          <input type="email" ng-model="siginCtrl.username"/>
+        </md-input-container>
+          
+        <md-input-container>
+          <label>Password</label>
+          <input type="password" ng-model="siginCtrl.password"/>
+        </md-input-container>  
+        
+        <div layout="row" layout-align="center center" style="padding-top:20px;">  
+          <md-button class="md-raised md-accent" flex="100">Login</md-button>
+        </div>
+        
+        <div layout="row" layout-align="space-between center">
+          <md-button href="" md-no-ink>
+            <span class="md-caption" ng-click="siginCtrl.isLoggin = false">Create an account</span>
+           </md-button>
+          <md-button href="" md-no-ink>
+            <span class="md-caption">Forgot Password</span>
+            </md-button>  
+        </div>
+        
+      </md-content>
+    </div>
+  </div>
+ 
+ 
+ 
+  <div id="modalRegister" layout="column" ng-if="!siginCtrl.isLoggin" layout-align="center center" layout-fill>
+    <div class="modalContent md-whiteframe-z1" layout="column">
+      
+      <md-toolbar class="md-hue-2" layout="row">
+        <h2 class="md-toolbar-tools">
+          <span>Register</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="siginCtrl.cancel()">
+          <md-icon md-svg-src="close_24" aria-label="Close dialog"></md-icon>
+        </md-button>        
+      </md-toolbar>
+      
+      <md-content class="md-padding" layout="column">
+        
+        <md-input-container>
+          <label>EmailAddress</label>
+          <input type="email" ng-model="siginCtrl.username"/>
+        </md-input-container>
+          
+        <md-input-container>
+          <label>Password</label>
+          <input type="password" ng-model="siginCtrl.password"/>
+        </md-input-container>
+        
+        <md-input-container>
+          <label>Confirm password</label>
+          <input type="password" ng-model="siginCtrl.passwordConfirm"/>
+        </md-input-container>           
+        
+        <div layout="row" layout-align="center center" style="padding-top:20px;">  
+          <md-button class="md-raised md-accent" flex="100">Register</md-button>
+        </div>
+        
+        <div layout="row" layout-align="space-between center">
+          <md-button href="" md-no-ink>
+            <span class="md-caption" ng-click="siginCtrl.isLoggin = true">Already have an accout</span>
+           </md-button>
+          <md-button href="" md-no-ink>
+            <span class="md-caption">Forgot Password</span>
+            </md-button>  
+        </div>
+        
+      </md-content>
+    </div>
+  </div> 
+ 
+ 
+</md-dialog>

@@ -1,0 +1,31 @@
+[
+	{	
+		"name" 	: "navigation", 
+		"menus" : [
+			{
+				"name" 			: "home",
+				"svgIcon"		: "home_24",
+				"uiSref"		: "home",
+				"requireLog":false 
+			},
+			{
+				"name" 			: "news",
+				"svgIcon"	: "event_note_24",
+				"uiSref"		: "news",
+				"requireLog":false 
+			}		
+		]		
+	},
+	
+	{	
+		"name" 	: "account", 
+		"menus" : [
+			{
+				"name" 			: "profile",
+				"svgIcon"		: "person_24",
+				"uiSref"		: "profile",
+				"requireLog":true 
+			}	
+		]		
+	}	
+]

@@ -1,0 +1,31 @@
+@import '../common/app.common.style';
+
+
+// md-sidenav md-tabs md-tabs-wrapper md-tabs-canvas md-tab-item.md-tab {
+//     max-width: inherit !important;
+// }
+
+md-tabs md-tabs-wrapper md-tabs-canvas md-tab-item.md-tab {
+    max-width: inherit !important;
+}
+
+.loginBox {
+  max-width:90%;
+  width: 500px
+}
+
+#modalLogin {
+  width: 600px;
+  
+  .modalContent {
+    width: 100%;  
+  }
+}
+
+#modalRegister {
+  width: 600px;
+  
+  .modalContent {
+    width: 100%;  
+  }
+}

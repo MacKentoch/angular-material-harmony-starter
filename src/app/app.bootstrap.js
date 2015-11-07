@@ -1,6 +1,7 @@
 /* global angular */
 //css
 import 'angular-material/angular-material.css!';
+import 'daneden/animate.css/animate.css!';
 
 import './appBundle.css!';
 

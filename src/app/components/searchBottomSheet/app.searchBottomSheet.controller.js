@@ -13,8 +13,6 @@ class searchBottomSheetController{
 	
 	init(){
 		this.searchSheetModel = this.searchBottomSheetModel;
-		console.info(`searchBottomSheetController : model : ${this.searchSheetModel}`);
-		console.dir(this.searchSheetModel);
 	}
 
 

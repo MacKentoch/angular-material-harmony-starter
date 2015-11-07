@@ -1,0 +1,33 @@
+@import '../common/app.common.style';
+
+// .md-toolbar-tools {
+// 	
+// 	h1{
+// 		font-size: inherit;
+// 		font-weight: inherit;
+// 		margin: inherit;		
+// 	}
+// 
+// }
+
+
+
+#topNavigationBar {
+	height: 80px;
+}
+
+#topSearchBar {
+	height: 80px;
+	
+}
+
+#siginButton {
+	width: 100%;
+	margin: {
+		bottom: 1px;
+	}
+}
+
+.transparentBackGround {
+	background-color: transparent !important;
+}

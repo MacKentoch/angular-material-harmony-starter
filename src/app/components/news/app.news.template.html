@@ -1,0 +1,22 @@
+<div layout="column" layout-padding>
+	<md-input-container>
+		<label>Filter</label>
+		<input ng-model="newsCtrl.filter">
+	</md-input-container>	
+</div>      
+
+<div layout="row" class="page-news" layout-padding layout-wrap layout-fill>
+	
+  <md-whiteframe 	class="md-whiteframe-1dp newsItem"
+									ng-repeat="newsItem in newsCtrl.newsList | filter:newsCtrl.filter" 
+									flex-sm="70" 
+									flex-gt-sm="60" 
+									flex-gt-md="40" 
+									layout-margin
+									layout layout-align="space-around center">
+    <span>{{newsItem.value}}</span>
+  </md-whiteframe>
+	
+	 
+</div>	
+	

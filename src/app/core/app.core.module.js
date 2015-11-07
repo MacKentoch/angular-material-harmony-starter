@@ -4,7 +4,9 @@ const CORE_MODULE_NAME = 'app.core.module';
 const CORE_MODULE_INJECT = [
 	'ngAria',
 	'ngAnimate',
-	'ngMaterial'
+	'ngMaterial',
+	'ngSanitize',
+	'ui.router'
 ];
 
 export default angular

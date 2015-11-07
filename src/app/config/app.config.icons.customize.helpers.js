@@ -10,6 +10,24 @@ const ROOT_NOTIFICATION					= 'public/svg/notification/';
 const ICON_TANK = [
 	
 	{
+		name : 'event_note',
+		icons : [
+			{
+				size 	: 18,
+				url		: `${ROOT_NOTIFICATION}ic_event_note_18px.svg`	
+			},
+			{
+				size 	: 24,
+				url		: `${ROOT_NOTIFICATION}ic_event_note_24px.svg`
+			},
+			{
+				size 	: 48,
+				url		: `${ROOT_NOTIFICATION}ic_event_note_48px.svg`
+			}										
+		]
+	},
+		
+	{
 		name : 'menu',
 		icons : [
 			{
@@ -32,24 +50,6 @@ const ICON_TANK = [
 	},
 	
 	{
-		name : 'event_note',
-		icons : [
-			{
-				size 	: 18,
-				url		: `${ROOT_NOTIFICATION}ic_event_note_18px.svg`	
-			},
-			{
-				size 	: 24,
-				url		: `${ROOT_NOTIFICATION}ic_event_note_24px.svg`
-			},
-			{
-				size 	: 48,
-				url		: `${ROOT_NOTIFICATION}ic_event_note_48px.svg`
-			}										
-		]
-	},	
-	
-	{
 		name : 'moreVertical',
 		icons : [
 			{
@@ -58,18 +58,41 @@ const ICON_TANK = [
 			},
 			{
 				size 	: 24,
-				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_more_vert_18px.svg`
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_more_vert_24px.svg`
 			},
 			{
 				size 	: 36,
-				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_more_vert_18px.svg`
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_more_vert_36px.svg`
 			},
 			{
 				size 	: 48,
-				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_more_vert_18px.svg`
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_more_vert_48px.svg`
 			}										
 		]
 	},
+	
+	{
+		name : 'close',
+		icons : [
+			{
+				size 	: 18,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_close_18px.svg`
+			},
+			{
+				size 	: 24,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_close_24px.svg`
+			},
+			{
+				size 	: 36,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_close_36px.svg`
+			},
+			{
+				size 	: 48,
+				url		: `${ROOT_NAVIGATION_ICONS_URL}ic_close_48px.svg`
+			}										
+		]
+	},
+		
 	
 	{
 		name : 'arrow_back',
@@ -131,6 +154,24 @@ const ICON_TANK = [
 			{
 				size 	: 48,
 				url		: `${ROOT_ACTION_ICONS_URL}ic_language_48px.svg`
+			}										
+		]
+	},	
+	
+	{
+		name : 'account_circle',
+		icons : [
+			{
+				size 	: 18,
+				url		: `${ROOT_ACTION_ICONS_URL}ic_account_circle_18px.svg`
+			},
+			{
+				size 	: 24,
+				url		: `${ROOT_ACTION_ICONS_URL}ic_account_circle_24px.svg`
+			},			
+			{
+				size 	: 48,
+				url		: `${ROOT_ACTION_ICONS_URL}ic_account_circle_48px.svg`
 			}										
 		]
 	},	

@@ -1,23 +1,10 @@
 @import '../common/app.common.style';
 
-.md-toolbar-tools {
+.page-home {
 	
-	h1{
-		font-size: inherit;
-		font-weight: inherit;
-		margin: inherit;		
+	.demoImage{
+		height: 200px; 
 	}
-
-}
-
-#topNavigationBar {
-	height: 80px;
-}
-
-#topSearchBar {
-	height: 80px;
-}
-
-.transparentBackGround {
-	background-color: transparent !important;
+	
+	
 }

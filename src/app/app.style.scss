@@ -2,9 +2,19 @@
 	app main scss
  ==============================*/
 
+@import './components/layout/app.layout.style';
 @import './components/home/app.home.style';
+@import './components/news/app.news.style';
+@import './components/signin/app.signin.style';
+@import './components/avatar/app.avatar.style';
+
 
 
 body {
 	background-color: $BG_COLOR;
+}
+
+//IE11 md-menu align hack : apply to each md-button to avoid a global override
+.md-menu-align-fix {
+	text-align: left;
 }

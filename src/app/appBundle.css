@@ -4,19 +4,65 @@
 /*============================== 
 	global app variables
  ==============================*/
-.md-toolbar-tools h1 {
-  font-size: inherit;
-  font-weight: inherit;
-  margin: inherit; }
-
 #topNavigationBar {
   height: 80px; }
 
 #topSearchBar {
   height: 80px; }
 
+#siginButton {
+  width: 100%;
+  margin-bottom: 1px; }
+
 .transparentBackGround {
   background-color: transparent !important; }
 
+/*============================== 
+	global app variables
+ ==============================*/
+.page-home .demoImage {
+  height: 200px; }
+
+/*============================== 
+	global app variables
+ ==============================*/
+.newsItem {
+  height: 120px; }
+
+/*============================== 
+	global app variables
+ ==============================*/
+md-tabs md-tabs-wrapper md-tabs-canvas md-tab-item.md-tab {
+  max-width: inherit !important; }
+
+.loginBox {
+  max-width: 90%;
+  width: 500px; }
+
+#modalLogin {
+  width: 600px; }
+  #modalLogin .modalContent {
+    width: 100%; }
+
+#modalRegister {
+  width: 600px; }
+  #modalRegister .modalContent {
+    width: 100%; }
+
+/*============================== 
+	global app variables
+ ==============================*/
+#userAvatar {
+  height: 64px;
+  width: 64px; }
+  #userAvatar svg {
+    border-radius: 99%;
+    height: 64px;
+    width: 64px;
+    background-color: #fff; }
+
 body {
   background-color: #F1F1F1; }
+
+.md-menu-align-fix {
+  text-align: left; }

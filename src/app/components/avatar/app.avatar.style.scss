@@ -1,0 +1,16 @@
+@import '../common/app.common.style';
+
+#userAvatar {
+	height: $USER_AVATAR_HEIGHT;
+	width: $USER_AVATAR_WIDTH;
+	// margin: {
+	// 	bottom: 5px;
+	// }
+	svg {
+		border-radius: 99%;
+		height: 64px;
+		width: 64px;
+		background-color: #fff;
+	}
+
+}

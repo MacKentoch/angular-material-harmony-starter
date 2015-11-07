@@ -5,6 +5,7 @@ function appConfig($mdThemingProvider, $mdIconProvider){
 	  $mdIconProvider
        .icon('menu_24',									getIconUrl('menu', 24))
        .icon('moreVertical',						getIconUrl('moreVertical', 24))
+			 .icon('close_24',								getIconUrl('close', 24))
 			 .icon('home_24',									getIconUrl('home', 24))
 			 .icon('search_24',								getIconUrl('search', 24))
 			 .icon('arrow_back_24',						getIconUrl('arrow_back', 24))
@@ -18,7 +19,10 @@ function appConfig($mdThemingProvider, $mdIconProvider){
 			 .icon('notifications_off_24',		getIconUrl('notifications_off', 24))
 			 .icon('error_48',								getIconUrl('error', 48))
 			 .icon('warning_24',							getIconUrl('warning', 24))
-			 .icon('warning_48',							getIconUrl('warning', 48));
+			 .icon('warning_48',							getIconUrl('warning', 48))
+			 .icon('event_note_24',						getIconUrl('event_note', 24))
+			 .icon('account_circle_48',				getIconUrl('account_circle', 48));
+			 
 			 
 			 
 		$mdThemingProvider.theme('default')
