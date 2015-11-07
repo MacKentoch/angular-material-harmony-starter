@@ -28,6 +28,10 @@ some basic templates :
 - [preview 3](https://rawgit.com/MacKentoch/angular-material-harmony-starter/master/demo3.html)
 
 
+##TODO :
+
+> to set route templates in cache for index.html 
+
 ___
 ##License
 

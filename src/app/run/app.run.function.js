@@ -29,6 +29,8 @@ function runFct($http, $templateCache){
 	angular.forEach(svgIconsUrls, function(url) {
 		$http.get(url, {cache: $templateCache});
 	});	
+		
+	
 	
 }
 
